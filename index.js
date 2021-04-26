@@ -9,16 +9,15 @@ app.use(cors()) // прежде чем создадутся ендпоинты, 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json()) // parse application/json используется для распаршивания входящего body
 
-//const smtp_login = process.env.SMTP_LOGIN || "---" // в heroku в настройках задаются эти значения, чтобы в репазитории не было видно пользовательских данных
-//const smtp_password = process.env.SMTP_PASSWORD || "---" // и во время запуска хероку подставит их вместо SMTP_LOGIN и SMTP_PASSWORD которые мы ввели в кабинете хероку
-
+const smtp_login = process.env.SMTP_LOGIN || "---" // в heroku в настройках задаются эти значения, чтобы в репазитории не было видно пользовательских данных
+const smtp_password = process.env.SMTP_PASSWORD || "---" // и во время запуска хероку подставит их вместо SMTP_LOGIN и SMTP_PASSWORD которые мы ввели в кабинете хероку
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: "frontendterminator@gmail.com", // generated ethereal user
-        pass: "react1991" // generated ethereal password
+        user: smtp_login, // generated ethereal user
+        pass: smtp_password // generated ethereal password
     }
 });
 
@@ -47,7 +46,6 @@ app.post('/sendMessage', async function (req, res) {
 })
 
 const port = process.env.PORT || 3010 // чтобы брался порт переменной окружения, а не захордкодженый
-//const port =  3010
 
 /* указываем порт и функцию которая выполниться при запуске*/
 app.listen(port, function () {
