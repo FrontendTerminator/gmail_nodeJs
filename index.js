@@ -46,10 +46,11 @@ app.post('/sendMessage', async function (req, res) {
     res.send("Ok")
 })
 
-const port = process.env.Port || 3010 // чтобы брался порт переменной окружения, а не захордкодженый
+const port = process.env.PORT || 3010 // чтобы брался порт переменной окружения, а не захордкодженый
 //const port =  3010
 
 /* указываем порт и функцию которая выполниться при запуске*/
 app.listen(port, function () {
     console.log('server on')
 })
+
